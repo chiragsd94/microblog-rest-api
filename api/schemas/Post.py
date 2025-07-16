@@ -4,14 +4,15 @@ from typing import Optional, List
 from api.schemas.Comment import Comment
 
 
-class BasePost(BaseModel):
+class PostInput(BaseModel):
     body: str
-    created: datetime = Field(default_factory=datetime.utcnow)
-    updated: datetime = Field(default_factory=datetime.utcnow)
 
 
-class Post(BasePost):
+class PostOutPut(BaseModel):
     id: int
+    body: str
+    created_at: datetime
+    updated_at: datetime
     comments: Optional[List[Comment]] = []
 
 

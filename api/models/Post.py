@@ -1,9 +1,6 @@
 from sqlalchemy import Table, Column, Integer, String, DateTime
 from datetime import datetime
-from sqlalchemy import MetaData
-
-
-metadata = MetaData()
+from api.db import metadata
 
 
 post_table = Table(

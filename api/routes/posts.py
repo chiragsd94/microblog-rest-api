@@ -1,4 +1,9 @@
 from fastapi import APIRouter
+from api.schemas.Post import PostInput, PostOutPut
+from api.models.Post import post_table
+from datetime import date, datetime
+from api.db import database
+
 
 router = APIRouter(
     prefix="/api/v1/posts",
@@ -12,8 +17,12 @@ async def get_all_posts():
 
 
 @router.post("/")
-async def create_post():
-    return {"message": "Create post"}
+async def create_post(request: PostInput):
+    data = request.model_dump()
+    query = post_table.insert().values(body=data["body"])
+    await database.execute(query)
+
+    return {"message": "post created"}
 
 
 @router.get("/{id}")
